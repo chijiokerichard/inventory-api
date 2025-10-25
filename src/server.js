@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require("mongoose");
+
 const cors = require("cors");
 const dotenv = require("dotenv");
 const { router } = require("./routes");
@@ -33,6 +35,18 @@ app.use("/api", router);
 app.get("/", (req, res) => {
   res.send("Hello from Express API checking done!");
 });
+
+const GO_URL = process.env.GO_URL;
+if (!GO_URL) {
+  console.error("❌ Missing MONGO_URL environment variable!");
+  process.exit(1);
+}
+
+mongoose
+  .connect(GO_URL)
+  .then(() => console.log("✅ database connected successfully"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`✅ Server running on http://localhost:${process.env.PORT || 3000}`);
