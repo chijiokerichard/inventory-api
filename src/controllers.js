@@ -53,7 +53,9 @@ const createCategory = async (req, res) => {
 };
 const createProduct = async (req, res) => {
   try {
+    console.log("Incoming product:", req.body);
     const { name, price, stock } = req.body;
+
     if (!name || !price || !stock) {
       return res
         .status(400)

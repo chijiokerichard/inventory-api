@@ -86,12 +86,12 @@ const productSchema = new Schema({
   stock: { type: Number, required: true },
   price: { type: Number, required: true },
   pub_date: { type: Date, default: Date.now,required:false },
-  category:{
-      type:Schema.Types.ObjectId,
-      ref:"ProductCategory",
-      required:true,
-      default:null
-    },
+  // category:{
+  //     type:Schema.Types.ObjectId,
+  //     ref:"ProductCategory",
+  //     required:true,
+  //     default:null
+  //   },
 //   expiry_date: { type: Date, required: true },
 })
 
