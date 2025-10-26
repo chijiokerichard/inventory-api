@@ -6,8 +6,6 @@ const { validateUserSignUp, validateUserLogin } = require("./middleware/validate
 
 
 const router = express.Router()
-
-
 router.post("/signup",validateUserSignUp,signUpUser)
 router.post("/login",validateUserLogin,loginUser)
 router.get("/users",allUser)
