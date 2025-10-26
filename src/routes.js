@@ -2,10 +2,11 @@ const { allUser, signUpUser, loginUser, createProduct, allProduct, createCategor
 
 const express = require("express")
 const { validateUserSignUp, validateUserLogin } = require("./middleware/validateUser")
-const authMiddleware = require("./middleware/authMiddleware")
+// const authMiddleware = require("./middleware/authMiddleware")
 
 
 const router = express.Router()
+
 
 router.post("/signup",validateUserSignUp,signUpUser)
 router.post("/login",validateUserLogin,loginUser)

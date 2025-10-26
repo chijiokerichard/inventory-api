@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 app.get("/", (req, res) => {
-  res.send("Hello from Express API checking done!");
+  res.send("Hello from Express API checking");
 });
 
 const GO_URL = process.env.GO_URL;
