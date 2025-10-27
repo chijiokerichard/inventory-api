@@ -37,24 +37,44 @@ const loginUser = async (req, res) => {
 
 const createCategory = async (req, res) => {
   try {
-    const category = req.body;
-    if (!category)
-      return res.status(401).json({ message: `Not authenticated` });
-    const conflict = await ProductCateory.find({ name: category.name });
-    if (conflict.length > 0)
+    const {category_name} = req.body;
+    if (!category_name)
+      return res.status(400).json({ message: `category required`});
+    const conflict = await ProductCateory.findOne({category_name:category_name});
+    if (conflict)
       return res.status(409).json({ message: "category already existed" });
     await ProductCateory.create(req.body);
     return res
       .status(201)
-      .json({ message: `${category} category created successfully` });
+      .json({ message: `${category_name} category created successfully` });
   } catch (err) {
     return res.status(500).json({ message: `error occured ${err.message}` });
   }
 };
+
+const allCategory = async (req, res) => {
+  try {
+    const categorys = await ProductCateory.find();
+    if(!categorys) return res.status(204).json({message:"Your category is empty"});
+    return res
+      .status(200)
+      .json({categorys});
+  } catch (err) {
+    if (err.code === "ENOTFOUND" || err.code === "ECONNREFUSED") {
+    return res.status(503).json({ message: `check your connection ${err.message}` })
+    }else{
+      return res.status(500).json({ message: `error occured ${err.message}` })
+    }
+
+  }
+};
+
+
 const createProduct = async (req, res) => {
   try {
     console.log("Incoming product:", req.body);
     const { name, price, stock } = req.body;
+    console.log(req.body)
 
     if (!name || !price || !stock) {
       return res
@@ -106,4 +126,5 @@ module.exports = {
   createProduct,
   allProduct,
   createCategory,
+  allCategory
 };

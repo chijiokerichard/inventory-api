@@ -1,4 +1,4 @@
-const { allUser, signUpUser, loginUser, createProduct, allProduct, createCategory } =  require("./controllers")
+const { allUser, signUpUser, loginUser, createProduct, allProduct, createCategory, allCategory } =  require("./controllers")
 
 const express = require("express")
 const { validateUserSignUp, validateUserLogin } = require("./middleware/validateUser")
@@ -12,5 +12,6 @@ router.get("/users",allUser)
 router.post("/create_product",createProduct)
 router.get("/products",allProduct)
 router.post("/create_category",createCategory)
+router.get("/allCategory",allCategory)
 
 module.exports={router}
